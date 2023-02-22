@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Digital Signage</title>
+	<style type="text/css">
+		body {
+			background-color: #f2f2f2;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			text-align: center;
+		}
+
+		h1 {
+			margin-top: 50px;
+			color: #333;
+		}
+
+		#result {
+			margin-top: 50px;
+			font-size: 72px;
+			font-weight: bold;
+			color: #333;
+		}
+
+		button {
+			background-color: #333;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 20px;
+		}
+
+		button:hover {
+			background-color: #666;
+		}
+
+		#img-container {
+			display: flex;
+			justify-content: center;
+			margin-top: 50px;
+			max-width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.img-box {
+			margin: 20px;
+			padding: 10px;
+			border: 5px solid #fff;
+			box-shadow: 0px 5px 10px #aaa;
+			border-radius: 10px;
+		}
+
+		.img-box:hover {
+			transform: scale(1.1);
+			box-shadow: 0px 10px 20px #aaa;
+		}
+
+		img {
+			max-width: 200px;
+			max-height: 200px;
+		}
+
+		.green {
+			background-color: #0dab76;
+			color: #fff;
+		}
+
+		.ember {
+			background-color: #ff8c3f;
+			color: #fff;
+		}
+
+		.red {
+			background-color: #c70039;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<h1>Digital Signage</h1>
+	<div id="result">0</div>
+  <button id="subtractBtn1">Subtract 10</button>
+	<button id="subtractBtn">Subtract</button>
+	<button id="resetBtn">Reset</button>
+	<button id="addBtn">Add</button>
+  <button id="addBtn1">Add 10</button>
+	<div id="img-container">
+		<div class="img-box green" id="green">
+			<img id="img1" src="/GREEN.png">
+			<p>Green</p>
+		</div>
+		<div class="img-box ember" id="ember">
+			<img id="img2" src="/EMBER.png">
+			<p>Ember</p>
+		</div>
+		<div class="img-box red" id="red">
+			<img id="img3" src="/RED.png">
+			<p>Red</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		let result = 0;
+		const resultElem = document.getElementById('result');
+		const addBtn = document.getElementById('addBtn');
+		const subtractBtn = document.getElementById('subtractBtn');
+    
+		const addBtn1 = document.getElementById('addBtn1');
+		const subtractBtn1 = document.getElementById('subtractBtn1');
+		const resetBtn = document.getElementById('resetBtn');
+		const img1 = document.getElementById('img1');
+		const img2 = document.getElementById('img2');
+		const img3 = document.getElementById('img3');
+    const box1 = document.getElementById('green');
+    const box2 = document.getElementById('ember');
+    const box3 = document.getElementById('red');
+
+		function updateResult(value) {
+			result += value;
+			resultElem.textContent = result;
+			if (result < 8) {
+				img1.style.display = 'block';
+				img2.style.display = 'none';
+				img3.style.display = 'none';
+        box1.style.display = 'block';
+				box2.style.display = 'none';
+				box3.style.display = 'none';
+
+			} else if (result >= 8 && result <= 12) {
+				img1.style.display = 'none';
+				img2.style.display = 'block';
+				img3.style.display = 'none';
+        box1.style.display = 'none';
+				box2.style.display = 'block';
+				box3.style.display = 'none';
+
+			} else {
+				img1.style.display = 'none';
+				img2.style.display = 'none';
+				img3.style.display = 'block';
+        box1.style.display = 'none';
+				box2.style.display = 'none';
+				box3.style.display = 'block';
+
+			}
+		}
+
+		addBtn.addEventListener('click', function() {
+			updateResult(1);
+		});
+
+		subtractBtn.addEventListener('click', function() {
+			if (result <= 0) {
+				result = 0;
+			}
+			else {
+				updateResult(-1);
+      }
+		});
+
+    addBtn1.addEventListener('click', function() {
+			updateResult(10);
+		});
+
+		subtractBtn1.addEventListener('click', function() {
+			if (result <= 0) {
+				result = 0;
+			}
+			else {
+				updateResult(-10);
+      }
+		});
+
+
+
+		resetBtn.addEventListener('click', function() {
+			result = 0;
+			resultElem.textContent = result;
+			img1.style.display = 'none';
+			img2.style.display = 'none';
+			img3.style.display = 'none';
+		});
+	</script>
+</body>
+</html>
